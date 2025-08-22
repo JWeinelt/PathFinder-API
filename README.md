@@ -1,2 +1,2 @@
 # PathFinder-API
-Minecraft with API for PathFinder suggestion system.
+[![Gradle Build](https://github.com/JWeinelt/PathFinder-API/actions/workflows/gradle.yml/badge.svg)](https://github.com/JWeinelt/PathFinder-API/actions/workflows/gradle.yml)
