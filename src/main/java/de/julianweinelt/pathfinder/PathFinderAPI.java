@@ -13,7 +13,10 @@ public class PathFinderAPI
     public static final String NAME = "PathFinder API";
     public static final String VERSION = "1.0.0";
 
-    private static Logger logger;
+    public static Logger logger;
+
+    @Mod.Instance
+    public static PathFinderAPI instance;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

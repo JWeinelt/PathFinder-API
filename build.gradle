@@ -14,8 +14,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = '1.0'
-group = 'com.yourname.modid' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'modid'
+group = 'de.julianweinelt.pathfinder' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'pathfinder'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -104,13 +104,23 @@ jar.finalizedBy('reobfJar')
 
 publishing {
     publications {
+        //mavenJava(MavenPublication) {
+        //    artifact jar
+        //}
         mavenJava(MavenPublication) {
-            artifact jar
+            from components.java
+            groupId = 'de.julianweinelt.pathfinder'
+            artifactId = 'PathFinderAPI'
+            version = '1.0.0'
         }
     }
     repositories {
         maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+            url = uri("https://repo.codeblocksmc.de/releases")
+            credentials {
+                username = project.findProperty("repoUser")
+                password = project.findProperty("repoPassword")
+            }
         }
     }
 }
