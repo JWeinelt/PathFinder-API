@@ -21,6 +21,6 @@ public class StringUtil {
 
     public static boolean startsWithIgnoreCase(String string, String prefix) throws IllegalArgumentException, NullPointerException {
         Preconditions.checkArgument(string != null, "Cannot check a null string for a match");
-        return string.length() < prefix.length() ? false : string.regionMatches(true, 0, prefix, 0, prefix.length());
+        return string.length() >= prefix.length() && string.regionMatches(true, 0, prefix, 0, prefix.length());
     }
 }
