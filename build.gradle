@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0'
+version = '1.0.1'
 group = 'de.julianweinelt.pathfinder' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'pathfinder'
 
@@ -85,12 +85,12 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "examplemod",
-            "Specification-Vendor": "examplemodsareus",
-            "Specification-Version": "1", // We are version 1 of ourselves
+            "Specification-Title": "pathfinder",
+            "Specification-Vendor": "julianweinelt",
+            "Specification-Version": "1",
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"examplemodsareus",
+            "Implementation-Vendor" :"julianweinelt",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
@@ -111,7 +111,7 @@ publishing {
             from components.java
             groupId = 'de.julianweinelt.pathfinder'
             artifactId = 'PathFinderAPI'
-            version = '1.0.0'
+            version = '1.0.1'
         }
     }
     repositories {
