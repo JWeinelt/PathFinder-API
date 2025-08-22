@@ -7,6 +7,8 @@ public class Argument {
     private final String name;
     private final String type;
     private final String description;
+    private String listName;
+    private final List<String> suggestions = new ArrayList<>();
     private final List<Argument> args = new ArrayList<>();
 
     public Argument(String name, String type, String description) {
@@ -22,5 +24,16 @@ public class Argument {
     public String getName() { return name; }
     public String getType() { return type; }
     public String getDescription() { return description; }
-    public List<Argument> getSubArgs() { return args; }
+
+    public String getListName() {
+        return listName;
+    }
+
+    public List<String> getSuggestions() {
+        return suggestions;
+    }
+
+    public List<Argument> getArgs() {
+        return args;
+    }
 }
