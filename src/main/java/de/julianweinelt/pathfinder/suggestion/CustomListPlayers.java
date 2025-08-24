@@ -3,9 +3,9 @@ package de.julianweinelt.pathfinder.suggestion;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import scala.actors.threadpool.Arrays;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CustomListPlayers implements CustomListProvider {
@@ -16,7 +16,7 @@ public class CustomListPlayers implements CustomListProvider {
         for (EntityPlayerMP player : server.getPlayerList().getPlayers()) {
             players.add(player.getName());
         }
-        players.addAll(Arrays.asList(new String[]{"@s", "@a", "@p", "@r", "@e"}));
+        players.addAll(Arrays.asList("@s", "@a", "@p", "@r", "@e"));
         return players;
     }
 }

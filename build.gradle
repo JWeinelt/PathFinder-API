@@ -1,10 +1,16 @@
 buildscript {
     repositories {
-        maven { url = 'https://maven.minecraftforge.net/' }
+        // Use gradlePluginPortal first as it's more reliable
+        gradlePluginPortal()
         mavenCentral()
+        maven {
+            name = 'maven'
+            url = 'https://maven.minecraftforge.net/'
+        }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+        // Use a specific known working version
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.0.183'
     }
 }
         
@@ -52,6 +58,15 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
         }
+    }
+}
+
+repositories {
+    // These repositories are needed for the game jars
+    mavenCentral()
+    maven {
+        name = 'maven'
+        url = 'https://maven.minecraftforge.net/'
     }
 }
 

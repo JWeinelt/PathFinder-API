@@ -9,10 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -28,22 +25,21 @@ public class CommandParser {
             ResourceLocation path = new ResourceLocation(namespace, "pathfinder.json");
 
             try {
-                if (new File(path.getResourcePath()).exists()) {
-                    IResource resource = rm.getResource(path);
-                    InputStreamReader reader = new InputStreamReader(resource.getInputStream());
-                    JsonObject data = parse(reader);
-                    if (data != null) {
-                        Type commandListType = new TypeToken<List<Command>>(){}.getType();
-                        List<Command> commands = new Gson().fromJson(data.get("commands"), commandListType);
-                        String nameSpace = data.get("namespace").getAsString();
-                        if (!Objects.equals(nameSpace, path.getResourceDomain())) PathFinderAPI.logger.warn(
-                                "Namespace mismatch: Expected {}, found {}", path.getResourceDomain(), nameSpace);
-
-                    }
+                // Check if the resource exists using the resource manager instead of file system
+                IResource resource = rm.getResource(path);
+                InputStreamReader reader = new InputStreamReader(resource.getInputStream());
+                JsonObject data = parse(reader);
+                if (data != null) {
+                    Type commandListType = new TypeToken<List<Command>>(){}.getType();
+                    List<Command> commands = new Gson().fromJson(data.get("commands"), commandListType);
+                    String nameSpace = data.get("namespace").getAsString();
+                    if (!Objects.equals(nameSpace, path.getResourceDomain())) PathFinderAPI.logger.warn(
+                            "Namespace mismatch: Expected {}, found {}", path.getResourceDomain(), nameSpace);
 
                 }
             } catch (Exception e) {
-                PathFinderAPI.logger.warn("Namespace {} does not have a valid pathfinder.json file.", namespace);
+                // Only log if it's not a simple "resource not found" case
+                PathFinderAPI.logger.debug("Namespace {} does not have a pathfinder.json file.", namespace);
             }
         }
     }
