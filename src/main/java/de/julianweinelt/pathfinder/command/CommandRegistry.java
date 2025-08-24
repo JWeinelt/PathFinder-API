@@ -1,5 +1,6 @@
 package de.julianweinelt.pathfinder.command;
 
+import de.julianweinelt.pathfinder.PathFinderAPI;
 import de.julianweinelt.pathfinder.suggestion.CustomListProvider;
 
 import javax.annotation.Nullable;
@@ -11,6 +12,17 @@ import java.util.List;
 public class CommandRegistry {
     private final HashMap<String, List<Command>> commandMap = new HashMap<>();
     private final HashMap<String, CustomListProvider> customListProviderMap = new HashMap<>();
+
+    public static CommandRegistry getInstance() {
+        return PathFinderAPI.getCommandRegistry();
+    }
+
+    public void registerNameSpace(@Nullable PNameSpace nameSpace) {
+        if (nameSpace == null) return;
+        for (Command c : nameSpace.getCommands()) {
+            registerCommand(nameSpace.getNameSpace(),c);
+        }
+    }
 
     public void registerCommand(String namespace, Command command) {
         commandMap.computeIfAbsent(namespace, k -> new ArrayList<>()).add(command);
