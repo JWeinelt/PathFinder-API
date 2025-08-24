@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = PathFinderAPI.MODID, name = PathFinderAPI.NAME, version = PathFinderAPI.VERSION)
+@Mod(modid = PathFinderAPI.MODID, name = PathFinderAPI.NAME, version = PathFinderAPI.VERSION, clientSideOnly = true)
 @Mod.EventBusSubscriber(modid = PathFinderAPI.MODID)
 public class PathFinderAPI
 {
