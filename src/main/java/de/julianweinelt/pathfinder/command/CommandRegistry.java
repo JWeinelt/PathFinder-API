@@ -17,8 +17,13 @@ public class CommandRegistry {
         return PathFinderAPI.getCommandRegistry();
     }
 
+    public HashMap<String, List<Command>> getCommandMap() {
+        return commandMap;
+    }
+
     public void registerNameSpace(@Nullable PNameSpace nameSpace) {
         if (nameSpace == null) return;
+        PathFinderAPI.logger.info("Registering commands for namespace {} with {} commands", nameSpace.getNameSpace(), nameSpace.getCommands().size());
         for (Command c : nameSpace.getCommands()) {
             registerCommand(nameSpace.getNameSpace(),c);
         }
