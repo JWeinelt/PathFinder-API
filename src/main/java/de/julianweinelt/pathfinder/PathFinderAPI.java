@@ -5,6 +5,7 @@ import de.julianweinelt.pathfinder.command.CommandRegistry;
 import de.julianweinelt.pathfinder.saving.ConfigManager;
 import de.julianweinelt.pathfinder.util.CustomListProvider;
 import de.julianweinelt.pathfinder.util.CustomListResult;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -26,7 +27,7 @@ import java.util.*;
 public class PathFinderAPI {
     public static final String MODID = "pathfinder";
     public static final String NAME = "PathFinder API";
-    public static final String VERSION = "1.1.0";
+    public static final String VERSION = "1.1.1";
 
     public static final HashMap<String, CustomListResult> customLists = new HashMap<>();
 
@@ -70,18 +71,21 @@ public class PathFinderAPI {
                 break;
             case "coordinate-x":
                 list.add("~");
+                if (player == null) return list;
                 list.add("" + player.getPosition().getX());
                 break;
             case "coordinate-y":
                 list.add("~");
+                if (player == null) return list;
                 list.add("" + player.getPosition().getY());
                 break;
             case "coordinate-z":
                 list.add("~");
+                if (player == null) return list;
                 list.add("" + player.getPosition().getZ());
                 break;
             case "player":
-                for (EntityPlayerMP mp : player.getServer().getPlayerList().getPlayers()) {
+                for (EntityPlayerMP mp : Minecraft.getMinecraft().player.getServer().getPlayerList().getPlayers()) {
                     list.add(mp.getName());
                 }
                 break;
