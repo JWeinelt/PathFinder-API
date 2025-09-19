@@ -9,6 +9,7 @@ public class Argument {
     private final String description;
     private String listName;
     private final List<String> suggestions = new ArrayList<>();
+    private String suggestion_type = "custom";
     private final List<Argument> args = new ArrayList<>();
 
     public Argument(String name, String type, String description) {
@@ -31,6 +32,14 @@ public class Argument {
 
     public List<String> getSuggestions() {
         return suggestions;
+    }
+
+    public String getSuggestion_type() {
+        return suggestion_type;
+    }
+
+    public void setSuggestion_type(String suggestion_type) {
+        this.suggestion_type = suggestion_type;
     }
 
     public List<Argument> getArgs() {
