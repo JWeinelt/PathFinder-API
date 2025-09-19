@@ -14,10 +14,10 @@ public class MainMenuHandler {
         if (event.getGui() instanceof GuiMainMenu) {
             GuiMainMenu menu = (GuiMainMenu) event.getGui();
 
-            int buttonWidth = 120;
+            int buttonWidth = 100;
             int buttonHeight = 20;
-            int x = menu.width / 2 - buttonWidth / 2;
-            int y = menu.height / 4;
+            int x = menu.width - buttonWidth;
+            int y = 10;
 
             event.getButtonList().add(new GuiButton(999, x, y, buttonWidth, buttonHeight, "Pathfinder"));
         }
