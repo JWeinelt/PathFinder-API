@@ -36,4 +36,41 @@ public class Argument {
     public List<Argument> getArgs() {
         return args;
     }
+    public boolean matches(String input) {
+        if (name != null && name.equalsIgnoreCase(input)) {
+            return true;
+        }
+
+        if (suggestions == null) return false;
+        for (String suggestion : suggestions) {
+            if (suggestion.equalsIgnoreCase(input)) {
+                return true;
+            }
+        }
+
+        switch (type.toLowerCase()) {
+            case "int":
+                try {
+                    Integer.parseInt(input);
+                    return true;
+                } catch (NumberFormatException ignored) {}
+                break;
+            case "double":
+                try {
+                    Double.parseDouble(input);
+                    return true;
+                } catch (NumberFormatException ignored) {}
+                break;
+            case "boolean":
+                if (input.equalsIgnoreCase("true") || input.equalsIgnoreCase("false")) {
+                    return true;
+                }
+                break;
+            case "string":
+                return true;
+        }
+
+        return false;
+    }
+
 }
