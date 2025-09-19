@@ -35,8 +35,8 @@ public class CommandParser {
         File file = new File(ConfigManager.getConfigFolder(), nameSpace + ".json");
         if (!file.exists()) {
             errors++;
-            logger.debug("JSON file not found: {}", file.getAbsolutePath());
-            return null;
+            logger.warn("JSON file not found: {}", file.getAbsolutePath());
+            return new PNameSpace(nameSpace);
         }
 
         try (FileReader reader = new FileReader(file)) {
@@ -45,8 +45,8 @@ public class CommandParser {
             return gson.fromJson(reader, type);
         } catch (IOException | JsonSyntaxException e) {
             errors++;
-            logger.debug("Could not load commands for namespace {}", nameSpace);
-            return null;
+            logger.warn("Could not load commands for namespace {}", nameSpace);
+            return new PNameSpace(nameSpace);
         }
     }
 
