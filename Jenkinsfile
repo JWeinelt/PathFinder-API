@@ -5,17 +5,17 @@ pipeline {
         jdk 'java8'
     }
 
+    parameters {
+        choice(
+            name: 'BUILD_TYPE',
+            choices: ['snapshot', 'beta', 'release'],
+            description: 'Versionstyp des Builds'
+        )
+    }
+
     stages {
         stage('Build') {
             agent {label 'Linux-Build'}
-
-            parameters {
-                choice(
-                    name: 'BUILD_TYPE',
-                    choices: ['snapshot', 'beta', 'release'],
-                    description: 'Versionstyp des Builds'
-                )
-            }
             
             steps {
                 cleanWs()
