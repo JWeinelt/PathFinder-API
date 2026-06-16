@@ -17,15 +17,17 @@ def baseVersion = project.findProperty("mod_version") ?: "0.0.0"
 
 def buildType = project.findProperty("buildType") ?: "snapshot"
 
+def buildNumber = project.findProperty("buildNumber") ?: "local"
+
 def versionName
 
 if (buildType == "release") {
     versionName = baseVersion
 } else if (buildType == "beta") {
-    versionName = "${baseVersion}-beta"
+    versionName = "${baseVersion}-beta+build.${buildNumber}"
 } else {
     def timestamp = new Date().format("yyyyMMdd.HHmm")
-    versionName = "${baseVersion}-SNAPSHOT+${timestamp}"
+    versionName = "${baseVersion}-SNAPSHOT+build.${buildNumber}.${timestamp}"
 }
 
 version = versionName
