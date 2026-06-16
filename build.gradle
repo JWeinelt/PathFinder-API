@@ -13,7 +13,23 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.1.1'
+def baseVersion = project.findProperty("mod_version") ?: "0.0.0"
+
+def buildType = project.findProperty("buildType") ?: "snapshot"
+
+def versionName
+
+if (buildType == "release") {
+    versionName = baseVersion
+} else if (buildType == "beta") {
+    versionName = "${baseVersion}-beta"
+} else {
+    def timestamp = new Date().format("yyyyMMdd.HHmm")
+    versionName = "${baseVersion}-SNAPSHOT+${timestamp}"
+}
+
+version = versionName
+
 group = 'de.julianweinelt.pathfinder' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'pathfinder'
 
