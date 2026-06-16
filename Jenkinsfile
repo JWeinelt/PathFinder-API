@@ -21,7 +21,7 @@ pipeline {
                 cleanWs()
         
                 checkout scm
-                sh "./gradlew build -PbuildType=${params.BUILD_TYPE}"
+                sh "./gradlew build -PbuildType=${params.BUILD_TYPE} -PbuildNumber=${BUILD_NUMBER}"
 
                 archiveArtifacts artifacts: 'build/libs/*.jar'
             }
