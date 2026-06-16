@@ -12,7 +12,7 @@ pipeline {
                 cleanWs()
         
                 checkout scm
-                sh './gradlew build'
+                sh './gradlew build -PbuildType=snapshot'
 
                 archiveArtifacts artifacts: 'build/libs/*.jar'
             }
